@@ -1,5 +1,11 @@
 package ru.job4j.calculator;
 
+/**
+ * Class Калькулятор для вычисления арифметических операций + - * /
+ * @author Evgeny Podobny
+ * @since 4.12.19
+ * @version 1
+ */
 
     public class Calculator {
 
@@ -20,7 +26,10 @@ package ru.job4j.calculator;
             System.out.println(first + "-" + second + " = " + result);
         }
 
-
+    /**
+     * method main
+     * @param args - args
+     */
         public static void main(String[] args) {
             add(1, 1);
             div(4, 2);
