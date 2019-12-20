@@ -7,7 +7,7 @@ import org.junit.Test;
 public class FitTest {
 
     @Test
-    public void manWeight () {
+    public void manWeight() {
         int in = 180;
         int expected = 92;
         double out = Fit.manWeight(in);
@@ -19,7 +19,7 @@ public class FitTest {
         int in = 170;
         int expected = 69;
         double out = Fit.womanWeight(in);
-        Assert.assertEquals(expected,out,0.01);
+        Assert.assertEquals(expected, out, 0.01);
     }
 
 }

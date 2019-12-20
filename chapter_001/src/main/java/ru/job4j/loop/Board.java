@@ -6,7 +6,7 @@ public class Board {
             for (int cell = 0; cell < width; cell++) {
                 int sum = cell + row;
                 // условие проверки, что писать пробел или X
-                if (sum % 2 == 0){
+                if (sum % 2 == 0) {
                     System.out.print("X");
                 } else {
                     System.out.print(" ");

@@ -5,11 +5,15 @@ public class Defragment {
         for (int index = 0; index < array.length; index++) {
             String cell = array[index];
             if (cell == null) {
-                int i = index+1;
-                while (array[i] == null) i++;
-                array[index]=array[i];
-                array[i]=null;
-                if (i==array.length - 1) break;
+                int i = index + 1;
+                while (array[i] == null) {
+                    i++;
+                }
+                array[index] = array[i];
+                array[i] = null;
+                if (i == array.length - 1) {
+                    break;
+                }
             }
         }
         return array;
