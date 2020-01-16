@@ -16,19 +16,11 @@ public class Merge {
             } else if (rightend) {
                 rsl[i++] = left[a++];
             } else if (left[a] <= right[b]) {
-                rsl[i++] = left[a];
-                if (a == left.length - 1) {
-                    leftend = true;
-                } else {
-                    a++;
-                }
+                rsl[i++] = left[a++];
+               leftend = a == left.length;
             } else if (right[b] <= left[a]) {
-                rsl[i++] = right[b];
-                if (b == right.length - 1) {
-                    rightend = true;
-                } else {
-                    b++;
-                }
+                rsl[i++] = left[b++];
+                leftend = b == right.length;
             }
         }
         return rsl;
