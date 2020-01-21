@@ -10,7 +10,6 @@ public class SortSelected {
             data[i] = data[index];
             data[index] = tmp;
         }
-
         return data;
     }
 }
