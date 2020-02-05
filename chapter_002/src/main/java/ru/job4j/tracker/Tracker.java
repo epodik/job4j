@@ -35,8 +35,9 @@ public class Tracker {
     }
 
     public Item findById(String id) {
-        if (indexOf(id) >= 0) {
-            return items[indexOf(id)];
+        int index = indexOf(id);
+        if (index >= 0) {
+            return items[index];
         } else {
             return null;
         }
@@ -55,15 +56,7 @@ public class Tracker {
     }
 
     public Item[] findAll() {
-        Item[] item = new Item[position];
-        int index = 0;
-        for (int i = 0; i < position; i++) {
-            if (items[i].getName() != null) {
-                item[index++] = items[i];
-            }
-        }
-        item = Arrays.copyOf(item, index);
-        return item;
+        return Arrays.copyOf(items, position);
     }
 
     private int indexOf(String id) {
@@ -90,8 +83,10 @@ public class Tracker {
 
     public void delete(String id) {
         int index = indexOf(id);
-        System.arraycopy(items, index + 1, items, index, position - index);
-        items[position] = null;
-        position--;
+        if (index != -1) {
+            System.arraycopy(items, index + 1, items, index, position - index);
+            items[position] = null;
+            position--;
+        }
     }
 }

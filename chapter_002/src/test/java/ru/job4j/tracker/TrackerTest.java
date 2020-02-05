@@ -20,7 +20,6 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Tracker tracker1 = new Tracker();
         tracker.add(new Item("test1"));
-        tracker.add(new Item(null));
         tracker.add(new Item("test2"));
         tracker1.add(new Item("test1"));
         tracker1.add(new Item("test2"));
