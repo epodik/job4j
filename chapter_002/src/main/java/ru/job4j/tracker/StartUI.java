@@ -30,17 +30,35 @@ public class StartUI {
                 String name = scanner.nextLine();
                 Item item = new Item(name);
                 tracker.replace(id, item);
+                Item result = tracker.findById(id);
+                if (result != null) {
+                    System.out.println("=== Успешное редактирование ===");
+                    System.out.println("name: " + result.getName() + " id: " + result.getId());
+                } else {
+                    System.out.println("=== Нет такого id ===");
+                }
             } else if (select == 3) {
                 System.out.println("=== Delete item ===");
                 System.out.print("Enter id: ");
                 String id = scanner.nextLine();
-                tracker.delete(id);
+                Item result = tracker.findById(id);
+                if (result != null) {
+                    tracker.delete(id);
+                    System.out.println("=== Успешное удаление ===");
+                } else {
+                    System.out.println("=== Нет такого id ===");
+                }
+
             } else if (select == 4) {
                 System.out.println("=== Find item by Id ===");
                 System.out.print("Enter id: ");
                 String id = scanner.nextLine();
                 Item result = tracker.findById(id);
-                System.out.println("name: " + result.getName() + " id: " + result.getId());
+                if (result == null) {
+                    System.out.println("===Нет такого id===");
+                } else {
+                    System.out.println("name: " + result.getName() + " id: " + result.getId());
+                }
             } else if (select == 5) {
                 System.out.println("=== Find items by name ===");
                 System.out.print("Enter name: ");
@@ -48,6 +66,9 @@ public class StartUI {
                 Item[] result = tracker.findByName(name);
                 for (int i = 0; i < result.length; i++) {
                     System.out.println("name: " + result[i].getName() + " id: " + result[i].getId());
+                }
+                if (result.length == 0) {
+                    System.out.println("=== Ничего не нашлось ===");
                 }
             } else if (select == 6) {
                 run = false;
