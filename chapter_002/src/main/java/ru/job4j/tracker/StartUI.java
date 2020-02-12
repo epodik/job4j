@@ -14,11 +14,9 @@ public class StartUI {
         String id = input.askStr("Enter id: ");
         String name = input.askStr("Enter name: ");
         Item item = new Item(name);
-        tracker.replace(id, item);
-        Item result = tracker.findById(id);
-        if (result != null) {
+        if (tracker.replace(id, item)) {
             System.out.println("=== Успешное редактирование ===");
-            System.out.println("name: " + result.getName() + " id: " + result.getId());
+            System.out.println("name: " + item.getName() + " id: " + item.getId());
         } else {
             System.out.println("=== Нет такого id ===");
         }
@@ -27,9 +25,7 @@ public class StartUI {
     public static void deleteItem(Input input, Tracker tracker) {
         System.out.println("=== Delete item ===");
         String id = input.askStr("Enter id: ");
-        Item result = tracker.findById(id);
-        if (result != null) {
-            tracker.delete(id);
+        if (tracker.delete(id)) {
             System.out.println("=== Успешное удаление ===");
         } else {
             System.out.println("=== Нет такого id ===");
@@ -71,7 +67,7 @@ public class StartUI {
         boolean run = true;
         while (run) {
             this.showMenu();
-            int select = Integer.valueOf(input.askInt("Select: "));
+            int select = input.askInt("Select: ");
             if (select == 0) {
                StartUI.createItem(input, tracker);
             } else if (select == 1) {

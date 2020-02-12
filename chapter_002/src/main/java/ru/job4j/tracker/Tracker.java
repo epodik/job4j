@@ -81,12 +81,15 @@ public class Tracker {
         }
     }
 
-    public void delete(String id) {
+    public boolean delete(String id) {
         int index = indexOf(id);
         if (index != -1) {
             System.arraycopy(items, index + 1, items, index, position - index);
             items[position] = null;
             position--;
+            return true;
+        } else {
+            return false;
         }
     }
 }
