@@ -32,76 +32,37 @@ public class StartUI {
         }
     }
 
-    public static void findItemById(Input input, Tracker tracker) {
-        System.out.println("=== Find item by Id ===");
-        String id = input.askStr("Enter id: ");
-        Item result = tracker.findById(id);
-        if (result == null) {
-            System.out.println("===Нет такого id===");
-        } else {
-            System.out.println("name: " + result.getName() + " id: " + result.getId());
-        }
-    }
-
-    public static void findItemByName(Input input, Tracker tracker) {
-        System.out.println("=== Find items by name ===");
-        String name = input.askStr("Enter name: ");
-        Item[] result = tracker.findByName(name);
-        for (int i = 0; i < result.length; i++) {
-            System.out.println("name: " + result[i].getName() + " id: " + result[i].getId());
-        }
-        if (result.length == 0) {
-            System.out.println("=== Ничего не нашлось ===");
-        }
-    }
-
-    public static void showAll(Tracker tracker) {
-        System.out.println("=== Show all items ===");
-        Item[] result = tracker.findAll();
-        for (int i = 0; i < result.length; i++) {
-            System.out.println("name: " + result[i].getName() + " id: " + result[i].getId());
-        }
-    }
-
-    public void init(Input input, Tracker tracker) {
+    public void init(Input input, Tracker tracker, UserAction[] actions) {
         boolean run = true;
         while (run) {
-            this.showMenu();
+            this.showMenu(actions);
             int select = input.askInt("Select: ");
-            if (select == 0) {
-               StartUI.createItem(input, tracker);
-            } else if (select == 1) {
-                StartUI.showAll(tracker);
-            } else if (select == 2) {
-                StartUI.editItem(input, tracker);
-            } else if (select == 3) {
-                StartUI.deleteItem(input, tracker);
-            } else if (select == 4) {
-                StartUI.findItemById(input, tracker);
-            } else if (select == 5) {
-                StartUI.findItemByName(input, tracker);
-            } else if (select == 6) {
-                run = false;
-            }
+            UserAction action = actions[select];
+            run = action.execute(input, tracker);
         }
     }
 
 
-    private void showMenu() {
+    private void showMenu(UserAction[] actions) {
         System.out.println("Menu.");
-        System.out.println("0. Add new item");
-        System.out.println("1. Show all items");
-        System.out.println("2. Edit item");
-        System.out.println("3. Delete item");
-        System.out.println("4. Find item by id");
-        System.out.println("5. Find items by name");
-        System.out.println("6. Exit program");
+        for (int index = 0; index < actions.length; index++) {
+            System.out.println(index + ". " + actions[index].name());
+        }
     }
 
 
     public static void main(String[] args) {
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(input, tracker);
+        UserAction[] actions = {
+                new CreateAction(),
+                new ShowAllAction(),
+                new EditAction(),
+                new DeleteAction(),
+                new FindByIdAction(),
+                new FindByNameAction(),
+                new ExitAction()
+        };
+        new StartUI().init(input, tracker, actions);
     }
 }
