@@ -23,4 +23,20 @@ public class ValidateInputTest {
         );
         System.setOut(out);
     }
+
+    @Test
+    public void whenIllegalInput() {
+        ByteArrayOutputStream mem = new ByteArrayOutputStream();
+        PrintStream out = System.out;
+        System.setOut(new PrintStream(mem));
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"5", "1"})
+        );
+        input.askInt("Enter",2);
+        assertThat(
+                mem.toString(),
+                is(String.format("Please select key from menu.%n"))
+        );
+        System.setOut(out);
+    }
 }
